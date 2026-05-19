@@ -1,7 +1,7 @@
 {
-  "name": "APPNAME",
-  "short_name": "APPNAME",
-  "description": "Free APPNAME app — part of FreeAppStore",
+  "name": "kanban",
+  "short_name": "kanban",
+  "description": "Free kanban app — part of FreeAppStore",
   "start_url": "/",
   "display": "standalone",
   "orientation": "any",
