@@ -63,7 +63,7 @@ export function ListColumn({ list, onAddCard, onCardClick, onRename, onDelete }:
             {list.title}
           </button>
         )}
-        <span className="shrink-0 text-xs text-[var(--muted)]">{list.cards.length}</span>
+        <ListBadges list={list} />
         <button
           onClick={() => {
             if (confirm(`Delete list "${list.title}"?`)) onDelete()
@@ -77,9 +77,15 @@ export function ListColumn({ list, onAddCard, onCardClick, onRename, onDelete }:
 
       <SortableContext items={list.cards.map((c) => c.id)} strategy={verticalListSortingStrategy}>
         <div ref={setNodeRef} className="flex min-h-[2rem] flex-col gap-2">
-          {list.cards.map((card) => (
-            <CardItem key={card.id} card={card} onClick={() => onCardClick(card)} />
-          ))}
+          {list.cards.length === 0 ? (
+            <div className="rounded-xl border border-dashed border-[var(--line)] px-3 py-4 text-center text-[11px] text-[var(--muted)]">
+              Drop a card here, or add one below
+            </div>
+          ) : (
+            list.cards.map((card) => (
+              <CardItem key={card.id} card={card} onClick={() => onCardClick(card)} />
+            ))
+          )}
         </div>
       </SortableContext>
 
@@ -129,6 +135,32 @@ export function ListColumn({ list, onAddCard, onCardClick, onRename, onDelete }:
           + Add a card
         </button>
       )}
+    </div>
+  )
+}
+
+/**
+ * Compact metadata next to the list title:
+ *   - Card count chip (always visible).
+ *   - A small red dot if any card in the list is overdue. Surfaces
+ *     urgency at the column level so creators see what to look at
+ *     without scrolling each list.
+ */
+function ListBadges({ list }: { list: List }) {
+  const now = Date.now()
+  const overdue = list.cards.some((c) => c.dueAt !== undefined && c.dueAt < now)
+  return (
+    <div className="flex shrink-0 items-center gap-1.5">
+      {overdue && (
+        <span
+          className="inline-block h-1.5 w-1.5 rounded-full bg-[var(--error)]"
+          aria-label="Has overdue cards"
+          title="Has overdue cards"
+        />
+      )}
+      <span className="inline-flex h-5 min-w-[20px] items-center justify-center rounded-full bg-[var(--paper-deep)] px-1.5 text-[11px] font-semibold tabular-nums text-[var(--muted)]">
+        {list.cards.length}
+      </span>
     </div>
   )
 }
