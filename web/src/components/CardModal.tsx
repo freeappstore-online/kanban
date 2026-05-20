@@ -204,7 +204,10 @@ export function CardModal({ card, onClose, onSave, onDelete }: CardModalProps) {
                     type="button"
                     onClick={() => removeChecklistItem(item.id)}
                     aria-label="Remove item"
-                    className="text-xs text-[var(--muted)] opacity-0 hover:text-[var(--error)] group-hover:opacity-100"
+                    // Touch-first: persistently dim on mobile (where
+                    // there's no hover) so the only delete affordance
+                    // isn't invisible. Lights up fully on pointer hover.
+                    className="rounded-full px-1.5 text-base leading-none text-[var(--muted)] opacity-40 hover:bg-[var(--paper-deep)] hover:text-[var(--error)] hover:opacity-100"
                   >
                     ×
                   </button>
