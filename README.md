@@ -9,3 +9,6 @@ Live: <https://kanban.freeappstore.online>
 - Deploy: `git push origin main`
 
 Free, MIT-licensed, no tracking, no analytics. Part of [FreeAppStore](https://freeappstore.online).
+## Deployment
+- Live: https://kanban.freeappstore.online
+- Source: https://github.com/freeappstore-online/kanban
