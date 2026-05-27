@@ -9,10 +9,16 @@ export function SignIn() {
           Personal boards. Sign in to sync across devices.
         </p>
         <button
-          onClick={() => fas.auth.signIn()}
+          onClick={() => fas.auth.signIn('github')}
           className="mt-6 w-full rounded-2xl bg-[var(--ink)] py-3 text-sm font-semibold text-[var(--paper)] hover:opacity-90"
         >
           Sign in with GitHub
+        </button>
+        <button
+          onClick={() => fas.auth.signIn('google')}
+          className="mt-3 w-full rounded-2xl bg-[var(--ink)] py-3 text-sm font-semibold text-[var(--paper)] hover:opacity-90"
+        >
+          Sign in with Google
         </button>
         <p className="mt-6 text-[0.65rem] uppercase tracking-[0.18em] text-[var(--muted)]">
           Part of{' '}
